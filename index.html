@@ -572,7 +572,11 @@
 @media (max-width: 480px) {
   #question-text { font-size: 22px; }
 }
-
+@media (max-width: 480px) {	  
+  #result-header {
+    margin-bottom: 20px !important;  /* Ajustez la valeur selon vos besoins */
+  }
+}
 
   </style>
 </head>
@@ -819,13 +823,6 @@
         finalScoreEl.style.color = "#00ff1a";
         finalImage.classList.add("raised");
         finalImage.style.width = (window.innerWidth <= 480) ? "150px" : "190px";
-
-	      // Vérifier la largeur de l'écran et ajuster la marge supérieure
-  if (window.innerWidth <= 480) {
-    resultHeader.style.marginbottom = "20px"; // Remonte l'image sur mobile (ajustez cette valeur selon vos besoins)
-  } else {
-    resultHeader.style.marginbottom = ""; // Valeur par défaut sur PC
-  }
         
         // --- Ajout de l'overlay GIF de victoire ---
         if (!document.getElementById("confet-overlay")) {
