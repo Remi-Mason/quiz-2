@@ -16,10 +16,10 @@
   <link rel="preload" as="image" href="images/decor2.gif">
   <link rel="preload" as="image" href="images/fire empty.png">
   <link rel="preload" as="image" href="images/fire full.png">
-  <link rel="preload" as="image" href="images/ryu.png">
-  <link rel="preload" as="image" href="images/ken.png">
-  <link rel="preload" as="image" href="images/ryu2.gif">
-  <link rel="preload" as="image" href="images/ken2.gif">
+  <link rel="preload" as="image" href="images/ryu.gif">
+  <link rel="preload" as="image" href="images/ken.gif">
+  <link rel="preload" as="image" href="images/ryu2.png">
+  <link rel="preload" as="image" href="images/ken2.png">
   <link rel="preload" as="image" href="images/mute-off.gif">
   <link rel="preload" as="image" href="images/mute-on.gif">
   <link rel="preload" as="image" href="images/perfect.gif">
@@ -29,6 +29,34 @@
   <style>
 
     /* Animations */
+	 @keyframes victoryAnimation {
+        0% { transform: scale(1) rotate(0deg); }
+        20% { transform: scale(1.1) rotate(3deg); }
+        40% { transform: scale(1) rotate(-3deg); }
+        60% { transform: scale(1.1) rotate(3deg); }
+        80% { transform: scale(1) rotate(-3deg); }
+        90% { transform: scale(1) rotate(0deg); }
+        100% { transform: scale(1) rotate(0deg); }
+      }
+      .victory-animation {
+        animation: victoryAnimation 2s ease-in-out infinite;
+        transform-origin: center;
+      }
+	@keyframes windmillShake {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(15deg); }
+  30% { transform: rotate(-15deg); }
+  45% { transform: rotate(10deg); }
+  60% { transform: rotate(-10deg); }
+  75% { transform: rotate(5deg); }
+  90% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.windmill-shake {
+  animation: windmillShake 0.8s ease-in-out forwards !important;
+  transform-origin: center;
+}
 	 @keyframes levitateLeft {
         0%   { transform: translate(40px, 0px); }
         50%  { transform: translate(40px, -10px); } /* monte de 10px */
@@ -177,7 +205,7 @@
     }
     /* Zone du quiz */
     #quiz-container {
-      background: linear-gradient(135deg, #2196F3, #0D47A1);
+      background: linear-gradient(135deg, #4CAF50, #81C784);
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
@@ -229,7 +257,7 @@
       width: 40px;
       height: 40px;
       margin-right: 8px;
-      margin-left: -40px;
+      margin-left: -50px;
       background: url('images/fire empty.png') no-repeat center;
       background-size: contain;
       flex-shrink: 0;
@@ -247,7 +275,7 @@
       display: block;
       padding: 15px 25px;
       font-size: 25px;
-      border: 3px solid yellow;
+      border: 3px solid #08ff08;
       border-radius: 10px;
       background-color: #1a1d21;
       color: white;
@@ -326,7 +354,7 @@
       background: linear-gradient(to top, black, gray);
       color: white;
       font-weight: bold;
-      border: 2px solid yellow;
+      border: 2px solid white;
       border-radius: 10px;
       text-shadow: 1px 1px 2px black;
       transition: transform 0.1s ease-in-out;
@@ -361,17 +389,16 @@
       }
 	  .decor-right {
   width: 80px;
-  transform: translate(-40px, 0px);
+  transform: translate(-40px, -10px);
   z-index: 0;
   padding: 12px 0px;
-  animation: levitateRight 1s ease-in-out infinite;
+
 }
 .decor-left {
   width: 80px;
-  transform: translate(40px, 0px);
+  transform: translate(40px, -10px);
   z-index: 0;
   padding: 12px 0px;
-  animation: levitateLeft 1s ease-in-out infinite;
 
 }
 @keyframes levitateLeftX {
@@ -412,6 +439,7 @@
       .again {
         display: block;
         margin: 0 auto 0px;
+		
       }
       @keyframes windmillShake {
         0% { transform: rotate(0deg); }
@@ -424,7 +452,7 @@
         100% { transform: rotate(0deg); }
       }
       .windmill-shake {
-        animation: windmillShake 0.8s ease-in-out forwards;
+         animation: windmillShake 0.8s ease-in-out forwards !important;
         transform-origin: center;
       }
       .raised {
@@ -472,7 +500,7 @@
           transform: translate(30px, -5px);
           z-index: 0;
           padding: 12px 0px;
-          animation: levitateRight 1s ease-in-out infinite;
+
         }
       }
       @media (max-width: 480px) {      
@@ -481,7 +509,7 @@
           transform: translate(-30px, -5px);
           z-index: 0;
           padding: 12px 0px;
-          animation: levitateLeft 1s ease-in-out infinite;
+
         }
       }
       @media (max-width: 480px) {      
@@ -541,6 +569,10 @@
   display: block;
   margin: 0 auto;
 }
+@media (max-width: 480px) {
+  #question-text { font-size: 22px; }
+}
+
 
   </style>
 </head>
@@ -684,7 +716,7 @@
         currentQuestion = 0;
         score = 0;
         showQuestion();
-      }, 2500);
+      }, 2000);
     });
     
     // Affichage de la question
@@ -733,9 +765,9 @@
         correctSound.play();
         resultDiv.innerHTML = `
           <div class="correct-container">
-            <img src="images/ryu.png" alt="Décoration gauche" class="decor-left">
+            <img src="images/ryu.gif" alt="Décoration gauche" class="decor-left">
             <img src="images/correct.png" alt="Bonne réponse" class="result-image correct">
-            <img src="images/ken.png" alt="Décoration droite" class="decor-right">
+            <img src="images/ken.gif" alt="Décoration droite" class="decor-right">
           </div>
         `;
         let ryuGif = document.querySelector('.decor-left');
@@ -748,9 +780,9 @@
         selectedSound.play();
         resultDiv.innerHTML = `
           <div class="incorrect-container">
-            <img src="images/ryu2.gif" alt="Décoration gauche" class="decor-leftX">
+            <img src="images/ryu2.png" alt="Décoration gauche" class="decor-leftX">
             <img src="images/incorrect.png" alt="Mauvaise réponse" class="result-image incorrect">
-            <img src="images/ken2.gif" alt="Décoration droite" class="decor-rightX">
+            <img src="images/ken2.png" alt="Décoration droite" class="decor-rightX">
           </div>
           <div class="incorrect-answer-header">Réponse :</div>
           <div class="incorrect-answer-text">${data.correctAnswers.join(", ")}</div>
@@ -787,7 +819,6 @@
         finalScoreEl.style.color = "#00ff1a";
         finalImage.classList.add("raised");
         finalImage.style.width = (window.innerWidth <= 480) ? "150px" : "190px";
-        finalImage.style.transform = "translateX(-20px)";
         
         // --- Ajout de l'overlay GIF de victoire ---
         if (!document.getElementById("confet-overlay")) {
@@ -807,7 +838,7 @@
         }
       } else {
         restartBtn.style.animation = "borderGlow2 2s ease-in-out infinite";
-        resultPage.style.background = "linear-gradient(135deg, #2196F3, #0D47A1)";
+        resultPage.style.background = "black";
         resultHeader.src = "images/tryagain.png";
         resultHeader.style.transform = "translateX(0)";
         resultHeader.style.marginTop = "10px";
@@ -827,7 +858,7 @@
       finalScoreEl.textContent = `Score : ${score} sur ${quizData.length}`;
       finalImage.src = (score === quizData.length)
         ? "images/perfect.gif"
-        : ((Math.random() < 0.5) ? "images/lose1.gif" : "images/lose1.gif");
+        : ((Math.random() < 0.5) ? "images/lose1.gif" : "images/lose2.gif");
       if (score === quizData.length) {
         document.getElementById("perfect-sound").currentTime = 0;
         document.getElementById("perfect-sound").play();
