@@ -582,11 +582,6 @@
     width: 85%;
   }
 }
-@media (max-width: 480px) {
-  #final-image.lose1-scale {
-    transform: translateY(-10px) scale(1.2) !important;
-  }
-}
   </style>
 </head>
 <body>
@@ -867,20 +862,27 @@
           resultHeader.classList.add("windmill-shake");
         }, 2800);
       }
-      resultPage.style.backgroundSize = "cover";
-      resultPage.style.backgroundPosition = "center";
-      finalScoreEl.textContent = `Score : ${score} sur ${quizData.length}`;
-      finalImage.src = (score === quizData.length)
-        ? "images/perfect.gif"
-        : ((Math.random() < 0.5) ? "images/lose1.gif" : "images/lose2.gif");
-      if (score === quizData.length) {
-        document.getElementById("perfect-sound").currentTime = 0;
-        document.getElementById("perfect-sound").play();
-      } else {
-        document.getElementById("imperfect-sound").currentTime = 0;
-        document.getElementById("imperfect-sound").play();
-      }
-    }
+resultPage.style.backgroundSize = "cover";
+resultPage.style.backgroundPosition = "center";
+finalScoreEl.textContent = `Score : ${score} sur ${quizData.length}`;
+finalImage.src = (score === quizData.length)
+  ? "images/perfect.gif"
+  : ((Math.random() < 0.5) ? "images/lose1.gif" : "images/lose2.gif");
+
+// Appliquer une transformation spécifique si c'est lose1.gif sur mobile
+if (finalImage.src.indexOf("lose1.gif") !== -1 && window.innerWidth <= 480) {
+  finalImage.style.transform = "translateY(-10px)"; // remonter de 20px
+} else {
+  finalImage.style.transform = "";
+}
+
+if (score === quizData.length) {
+  document.getElementById("perfect-sound").currentTime = 0;
+  document.getElementById("perfect-sound").play();
+} else {
+  document.getElementById("imperfect-sound").currentTime = 0;
+  document.getElementById("imperfect-sound").play();
+}
     
     restartBtn.addEventListener("click", () => { window.location.reload(); });
     
