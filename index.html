@@ -311,6 +311,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+	  margin-top: -30px;
     }
     .correct-decoration { width: 60px; }
     /* Pour l'image de bonne réponse, largeur de 80px adaptée aux GIFs */
@@ -330,6 +331,7 @@
       background: linear-gradient(135deg, #2196F3, #0D47A1);
       display: none; 
       position: relative;
+	  border: 3px solid white;
     }
     #result-page h2 { font-size: 24px; margin-bottom: 20px; }
     #final-score {
@@ -368,6 +370,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+		margin-top: -40px;
       }
 	  .decor-leftX, .decor-rightX {
   width: 80px;
@@ -579,7 +582,11 @@
     width: 85%;
   }
 }
-
+@media (max-width: 480px) {
+  #final-image.lose1-scale {
+    transform: translateY(-10px) scale(1.2) !important;
+  }
+}
   </style>
 </head>
 <body>
