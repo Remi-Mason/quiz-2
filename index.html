@@ -804,8 +804,8 @@
              <img src="images/incorrect.png" alt="Mauvaise réponse" class="result-image incorrect">
              <img src="images/ken2.png" alt="Décoration droite" class="decor-rightX">
            </div>
-           <!-- Placeholder pour le bouton "Suivant" avec marge inférieure -->
-           <div id="next-button-placeholder" style="margin-bottom: 30px;"></div>
+           <!-- Placeholder pour le bouton "Suivant" -->
+           <div id="next-button-placeholder"></div>
            <div class="incorrect-answer-header">Réponse :</div>
            <div class="incorrect-answer-text">${data.correctAnswers.join(", ")}</div>`;
         
@@ -817,9 +817,10 @@
             incorrectContainer.innerHTML = "";
           }
           
-          // Insérer le bouton "Suivant" dans le placeholder
+          // Insérer le bouton "Suivant" dans le placeholder et lui appliquer une marge inférieure de 10px
           const nextPlaceholder = document.getElementById("next-button-placeholder");
           if (nextPlaceholder) {
+            nextPlaceholder.style.marginBottom = "10px";
             const nextBtn = document.createElement("button");
             nextBtn.id = "next-btn";
             nextBtn.textContent = "Suivant";
