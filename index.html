@@ -30,6 +30,43 @@
   
   <style>
     /* Animations */
+    @keyframes victoryAnimation {
+      0% { transform: scale(1) rotate(0deg); }
+      20% { transform: scale(1.1) rotate(3deg); }
+      40% { transform: scale(1) rotate(-3deg); }
+      60% { transform: scale(1.1) rotate(3deg); }
+      80% { transform: scale(1) rotate(-3deg); }
+      90% { transform: scale(1) rotate(0deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+    .victory-animation {
+      animation: victoryAnimation 2s ease-in-out infinite;
+      transform-origin: center;
+    }
+    @keyframes windmillShake {
+      0% { transform: rotate(0deg); }
+      15% { transform: rotate(15deg); }
+      30% { transform: rotate(-15deg); }
+      45% { transform: rotate(10deg); }
+      60% { transform: rotate(-10deg); }
+      75% { transform: rotate(5deg); }
+      90% { transform: rotate(-5deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .windmill-shake {
+      animation: windmillShake 0.8s ease-in-out forwards !important;
+      transform-origin: center;
+    }
+    @keyframes levitateLeft {
+      0%   { transform: translate(40px, 0px); }
+      50%  { transform: translate(40px, -10px); }
+      100% { transform: translate(40px, 0px); }
+    }
+    @keyframes levitateRight {
+      0%   { transform: translate(-40px, 0px); }
+      50%  { transform: translate(-40px, -10px); }
+      100% { transform: translate(-40px, 0px); }
+    }
     @keyframes shake {
       0% { transform: translate(0, 0); }
       10% { transform: translate(-10px, -10px); }
@@ -72,35 +109,41 @@
     }
     @keyframes floatAnimation {
       0%   { transform: translateY(0); }
-      25%  { transform: translateY(-3px); }
-      50%  { transform: translateY(0); }
-      75%  { transform: translateY(5px); }
+      50%  { transform: translateY(-10px); }
       100% { transform: translateY(0); }
     }
+    /* Appliquer l'animation au titre */
     .floating-title {
+      position: relative;
+      z-index: 3;
       animation: floatAnimation 8s ease-in-out infinite;
       display: block;
-      margin: 0 auto 20px;
+      margin: -10px auto 10px;
       max-width: 90%;
+      width: auto;
     }
+    /* Pour centrer l'image décorative */
     .pikachu {
-      border: 3px solid white;
       display: block;
       margin: 0 auto;
-      max-width: 100%;
-      margin-bottom: 20px;
+      transform: translateY(19px)!important;
+      transform: translateX(-3px);
+      width: 210px !important;
+      height: 192px !important;
     }
+    /* Centrage général des images de résultat */
     #result-header {
       display: block;
       margin: 0 auto 20px;
-      margin-left: 20px;
     }
+    /* Styles généraux */
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #2C2C2C, #555555, #888888, #BBBBBB);
+      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,94,121,1) 0%, rgba(0,212,255,1) 100%);
       background-size: 100% 100%;
+      animation: quizBGAnimation 10s ease infinite;
     }
     body {
       display: flex;
@@ -112,13 +155,15 @@
       max-width: 90%;
       background: url('images/wall.png') no-repeat center center;
       background-size: cover;
-      border: 3px solid white;
+      border: 3px solid black;
       border-radius: 15px;
       text-align: center;
       padding: 30px;
       margin: 20px auto;
       transition: transform 0.3s ease;
+      position: relative;
     }
+    /* Page d'accueil */
     #home { width: 360px; }
     #start-btn {
       display: flex;
@@ -130,15 +175,16 @@
       padding: 5px 10px;
       font-size: 18px;
       cursor: pointer;
-      background: linear-gradient(to top, black, gray);
+      background: linear-gradient(135deg, #2196F3, #0D47A1);
       color: white;
       font-weight: bold;
-      border: 2px solid white;
+      border: 3px solid white;
       border-radius: 10px;
       text-shadow: 1px 1px 2px black;
       transition: transform 0.1s ease-in-out;
       animation: borderGlow 2s ease-in-out infinite;
       position: relative;
+      top: 25px;
       overflow: visible;
     }
     #start-btn:active {
@@ -154,8 +200,9 @@
       height: auto;
       pointer-events: none;
     }
+    /* Zone du quiz */
     #quiz-container {
-      background: linear-gradient(135deg, #2c2c2c, #808080);
+      background: linear-gradient(135deg, #4CAF50, #81C784);
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
@@ -164,6 +211,7 @@
     }
     #question-counter {
       font-weight: bold;
+      margin-bottom: 5px;
       font-family: Arial, sans-serif;
       color: white;
       margin-top: -20px;
@@ -182,11 +230,14 @@
     }
     .options {
       font-family: Arial, sans-serif;
+      font-weight: normal;
       font-size: 18px;
       color: white;
       text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 3px 3px 5px black;
       text-align: left;
-      margin: 0 0 30px 20px;
+      margin: 0;
+      margin-bottom: 30px;
+      margin-left: 20px;
       padding-left: 20px;
     }
     .option {
@@ -200,10 +251,10 @@
     .option label:before {
       content: "";
       display: inline-block;
-      width: 60px;
-      height: 60px;
+      width: 40px;
+      height: 40px;
       margin-right: 8px;
-      margin-left: -60px;
+      margin-left: -50px;
       background: url('images/fire empty.png') no-repeat center;
       background-size: contain;
       flex-shrink: 0;
@@ -211,18 +262,17 @@
     .option input[type="checkbox"]:checked + label:before {
       background: url('images/fire full.png') no-repeat center;
       background-size: contain;
-      width: 60px;
-      height: 60px;
+      width: 40px;
+      height: 40px;
     }
-    /* Boutons Valider et Suivant avec même style */
-    #validate-btn, #next-btn {
+    #validate-btn {
       font-weight: bold;
       margin: 0 auto;
       margin-top: 30px;
       display: block;
       padding: 15px 25px;
       font-size: 25px;
-      border: 3px solid white;
+      border: 3px solid #08ff08;
       border-radius: 10px;
       background-color: #1a1d21;
       color: white;
@@ -230,7 +280,7 @@
       transition: transform 0.1s ease, box-shadow 0.1s ease;
       animation: borderGlow 2s ease-in-out infinite;
     }
-    #validate-btn:active, #next-btn:active { transform: translateY(2px) scale(0.98); }
+    #validate-btn:active { transform: translateY(2px) scale(0.98); }
     #result { margin-top: 20px; }
     .result-image {
       width: 60px;
@@ -243,38 +293,43 @@
       font-weight: bold;
       font-family: 'Arial Black', Arial, sans-serif;
       text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 3px 3px 5px black;
-      margin: 5px 0 10px;
+      margin-bottom: 10px;
+      margin-top: 5px;
     }
     .incorrect-answer-header {
-      margin-top: -40px;
+      margin-top: 0px;
       font-weight: bold;
       font-size: 18px;
       font-family: 'Arial Black', Arial, sans-serif;
       text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 3px 3px 5px black;
       color: white;
     }
-    /* Conteneur pour décaler le bloc "Réponse :" et le texte quand le bouton "Suivant" apparaît */
-    .incorrect-answer-wrapper {
-      margin-top: 20px;
-    }
     .correct-container {
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: -30px;
     }
     .correct-decoration { width: 60px; }
+    /* Pour l'image de bonne réponse, largeur de 80px adaptée aux GIFs */
     .correct-container .result-image.correct {
       animation: popAnimation 0.5s ease-out;
       width: 80px;
-      margin-top: -40px;
+      margin-bottom: 25px;
       z-index: 1;
     }
     .result-image.incorrect {
       width: 80px;
-      margin-top: -60px;
+      margin-top: 25px;
       animation: shake 0.5s ease-in-out;
     }
-    #result-page { display: none; }
+    /* Page finale */
+    #result-page {  
+      background: linear-gradient(135deg, #2196F3, #0D47A1);
+      display: none; 
+      position: relative;
+      border: 3px solid white;
+    }
     #result-page h2 { font-size: 24px; margin-bottom: 20px; }
     #final-score {
       margin-top: -15px;
@@ -305,150 +360,220 @@
       position: relative;
       overflow: visible;
       animation: borderGlow2 2s ease-in-out infinite;
+      z-index: 6; 
     }
     #restart-btn:active { transform: scale(0.95); }
-    @media (max-width: 480px) {
-      .container { width: 90%; padding: 15px; padding-top: 20px; }
-      #question-text { font-size: 18px; }
-      #final-score { font-size: 20px; }
-      .floating-title { margin: 0 auto 10px; }
-      .pikachu { margin: 0 auto; }
+    .incorrect-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -40px;
     }
-    .startu { border-radius: 10px; }
+    .decor-leftX, .decor-rightX {
+      width: 80px;
+      padding: 12px 0;
+    }
+    .decor-rightX {
+      width: 80px;
+      transform: translate(-30px, 3px);
+      z-index: 0;
+      padding: 12px 0px;
+      animation: levitateRightX 1s ease-in-out infinite;
+    }
+    .decor-leftX {
+      width: 80px;
+      transform: translate(30px, 3px);
+      z-index: 0;
+      padding: 12px 0px;
+      animation: levitateLeftX 1s ease-in-out infinite;
+    }
     .decor-right {
       width: 80px;
-      transform: translate(-32px, -20px);
+      transform: translate(-40px, -10px);
       z-index: 0;
       padding: 12px 0px;
     }
     .decor-left {
       width: 80px;
-      transform: translate(30px, -20px);
+      transform: translate(40px, -10px);
       z-index: 0;
       padding: 12px 0px;
     }
-    .incorrect-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    @keyframes levitateLeftX {
+      0%   { transform: translate(40px, 3px); }
+      50%  { transform: translate(40px, 13px); }
+      100% { transform: translate(40px, 3px); }
     }
-    .decor-rightX {
-      width: 80px;
-      transform: translate(-40px, -40px);
-      z-index: 0;
-      padding: 12px 0px;
+    @keyframes levitateRightX {
+      0%   { transform: translate(-40px, 3px); }
+      50%  { transform: translate(-40px, 13px); }
+      100% { transform: translate(-40px, 3px); }
     }
-    .decor-leftX {
-      width: 80px;
-      transform: translate(40px, -40px);
-      z-index: 0;
-      padding: 12px 0px;
-    }
-    .again {
+    .centipod {
       display: block;
       margin: 0 auto;
     }
-    @keyframes windmillShake {
-      0% { transform: rotate(0deg); }
-      15% { transform: rotate(15deg); }
-      30% { transform: rotate(-15deg); }
-      45% { transform: rotate(10deg); }
-      60% { transform: rotate(-10deg); }
-      75% { transform: rotate(5deg); }
-      90% { transform: rotate(-5deg); }
-      100% { transform: rotate(0deg); }
-    }
-    .windmill-shake {
-      animation: windmillShake 0.8s ease-in-out forwards;
-      transform-origin: center;
-    }
-    .raised {
-      transform: translateY(-20px);
-      margin-bottom: -10px !important;
-    }
-    @keyframes victoryAnimation {
-      0% { transform: scale(1) rotate(0deg); }
-      20% { transform: scale(1.1) rotate(3deg); }
-      40% { transform: scale(1) rotate(-3deg); }
-      60% { transform: scale(1.1) rotate(3deg); }
-      80% { transform: scale(1) rotate(-3deg); }
-      90% { transform: scale(1) rotate(0deg); }
-      100% { transform: scale(1) rotate(0deg); }
-    }
-    .victory-animation {
-      animation: victoryAnimation 2s ease-in-out infinite;
-      transform-origin: center;
+    .vidget {
+      display: block;
+      margin: 0 auto;
     }
     @media (max-width: 480px) {
+      .container {       
+        width: 360px;
+        max-width: 90%;
+        padding: 30px;
+      }
+      #overlay {
+        top: 85px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+      }
+      #question-text { font-size: 18px; }
+      #final-score { font-size: 20px; }
+      .floating-title { margin: 0 auto 0px; }
       .pikachu {
-        width: 85%;
-        margin: 0 auto;
-        transform: translateX(0px);
-      }
-    }
-    @media (max-width: 480px) {
-      .again {
-        width: 85%;
-        margin: 0 auto;
-        transform: translateX(0px);
-      }
-    }
-    @media (max-width: 480px) {
-      #result-header {
         display: block;
-        margin: 0 auto 20px;
-        width: 85%;
       }
-    }
-    @media (max-width: 480px) {
-      .decor-right {
-        width: 80px;
-        transform: translate(-12px, -20px);
-        z-index: 0;
-        padding: 12px 0px;
+      .startu { border-radius: 10px; }
+      .incorrect-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-    }
-    @media (max-width: 480px) {
-      .decor-left {
-        width: 80px;
-        transform: translate(10px, -20px);
-        z-index: 0;
-        padding: 12px 0px;
+      .again {
+        display: block;
+        margin: 0 auto 0px;
       }
-    }
-    @media (max-width: 480px) {
-      .decor-rightX {
-        width: 80px;
-        transform: translate(-10px, -40px);
-        z-index: 0;
-        padding: 12px 0px;
+      @keyframes windmillShake {
+        0% { transform: rotate(0deg); }
+        15% { transform: rotate(15deg); }
+        30% { transform: rotate(-15deg); }
+        45% { transform: rotate(10deg); }
+        60% { transform: rotate(-10deg); }
+        75% { transform: rotate(5deg); }
+        90% { transform: rotate(-5deg); }
+        100% { transform: rotate(0deg); }
       }
-    }
-    @media (max-width: 480px) {
-      .decor-leftX {
-        width: 80px;
-        transform: translate(10px, -40px);
-        z-index: 0;
-        padding: 12px 0px;
+      .windmill-shake {
+        animation: windmillShake 0.8s ease-in-out forwards !important;
+        transform-origin: center;
       }
-    }
-    @media (max-width: 480px) {
-      #question-text { font-size: 22px; }
-    }
-    @media (max-width: 480px) {
-      #mute-btn {
-        margin-top: 30px!important;
+      .raised {
+        transform: translateY(-20px);
+        margin-bottom: -10px !important;
       }
-    }
-    @media (max-width: 480px) {
-      #final-score {
-        font-size: 28px !important;
+      @keyframes victoryAnimation {
+        0% { transform: scale(1) rotate(0deg); }
+        20% { transform: scale(1.1) rotate(3deg); }
+        40% { transform: scale(1) rotate(-3deg); }
+        60% { transform: scale(1.1) rotate(3deg); }
+        80% { transform: scale(1) rotate(-3deg); }
+        90% { transform: scale(1) rotate(0deg); }
+        100% { transform: scale(1) rotate(0deg); }
       }
-    }
-    /* Fin ajout règle */
-    #next-btn {
-      position: relative;
-      top: -30px;
+      .victory-animation {
+        animation: victoryAnimation 2s ease-in-out infinite;
+        transform-origin: center;
+      }
+      @media (max-width: 480px) {
+        .pikachu {
+          display: block;
+          margin: 0 auto;
+          width: 290px;
+          height: 215px;
+        }
+      }
+      @media (max-width: 480px) {
+        .again {
+          width: 85%;
+          margin: 0 auto;
+          transform: translateX(0px);
+        }
+      }
+      @media (max-width: 480px) {      
+        #result-header {
+          display: block;
+          margin: 0 auto 20px;
+          width: 85%;
+        }
+      }
+      @media (max-width: 480px) {      
+        .decor-right {
+          width: 80px;
+          transform: translate(-20px, -5px);
+          z-index: 0;
+          padding: 12px 0px;
+        }
+      }
+      @media (max-width: 480px) {      
+        .decor-left {
+          width: 80px;
+          transform: translate(20px, -5px);
+          z-index: 0;
+          padding: 12px 0px;
+        }
+      }
+      @media (max-width: 480px) {      
+        .decor-rightX {
+          width: 80px;
+          transform: translate(-30px, 0px);
+          z-index: 0;
+          padding: 12px 0px;
+        }
+      }
+      @media (max-width: 480px) {      
+        .decor-leftX {
+          width: 80px;
+          transform: translate(30px, 0px);
+          z-index: 0;
+          padding: 12px 0px;
+        }
+      }
+      @media (max-width: 480px) {
+        .floating-title {
+          margin-top: -10px;
+          margin-bottom: 15px;
+        }
+      }
+      @media (max-width: 480px) {
+        @keyframes levitateLeft {
+          0%   { transform: translate(20px, 0px); }
+          50%  { transform: translate(20px, -15px); }
+          100% { transform: translate(20px, 0px); }
+        }
+        @keyframes levitateRight {
+          0%   { transform: translate(-20px, 0px); }
+          50%  { transform: translate(-20px, -15px); }
+          100% { transform: translate(-20px, 0px); }
+        }
+      }
+      @media (max-width: 480px) {
+        @keyframes levitateLeftX {
+          0%   { transform: translate(20px, 3px); }
+          50%  { transform: translate(20px, 13px); }
+          100% { transform: translate(20px, 3px); }
+        }
+        @keyframes levitateRightX {
+          0%   { transform: translate(-20px, 3px); }
+          50%  { transform: translate(-20px, 13px); }
+          100% { transform: translate(-20px, 3px); }
+        }
+      }
+      @media (max-width: 480px) {
+        #question-text { font-size: 22px; }
+      }
+      @media (max-width: 480px) {	  
+        #result-header {
+          display: block;
+          margin: 0 auto 50px !important;
+          width: 85%;
+        }
+      }
+      @media (max-width: 480px) {
+        #final-score {
+          font-size: 28px !important;
+        }
+      }
     }
   </style>
 </head>
@@ -464,15 +589,21 @@
   
   <!-- Page d'accueil -->
   <div class="container" id="home">
+    <!-- Titre centré -->
     <img src="images/titre.png" alt="quiz ssiap1" class="floating-title">
-    <img src="" alt="pik" class="pikachu" style="visibility: hidden;">
-    <img id="mute-btn" src="images/mute-off.gif" alt="Son activé" style="cursor: pointer; width: 30px; height: 25px; margin-bottom: 10px; margin-top: 10px">
-    <button id="start-btn"><img src="images/start.png" style="margin-left: 5px;"></button>
+    <img src="images/vidget.gif" alt="videx" class="vidget" style="display: block; margin: 40px auto; position: relative; top: -30px;">
+    <!-- Image décorative centrée -->
+    <img src="images/decor.gif" alt="pik" class="pikachu" style="display: none; z-index: 3;">
+    <!-- Image GBC en tant qu'image normale (non overlay) -->
+    <img src="images/GBC.png" alt="GBC" style="display: none; margin: -200px auto 0 auto; border: 3px solid black; width: 290px; height: auto; position: relative; z-index: 2;">
+    <!-- Bouton mute et bouton start… -->
+    <img id="mute-btn" src="images/mute-off.gif" alt="Son activé" style="cursor: pointer; width: 30px; height: 25px; margin-bottom: 20px; margin-top: 25px;">
+    <button id="start-btn"><img src="images/start.png" style="margin-bottom: -30px; width: 120px"></button>
   </div>
   
   <!-- Zone du quiz -->
   <div class="container" id="quiz-container">
-    <div id="question-counter">Question 1 / <span id="total-questions"></span></div>
+    <div id="question-counter">Question 1 / 3</div>
     <div id="question-text">[Texte de la question]</div>
     <div class="options" id="options">
       <!-- Les options seront générées dynamiquement -->
@@ -485,53 +616,47 @@
   <div class="container" id="result-page">
     <img id="result-header" src="images/tryagain.png" alt="encore" class="again">
     <img id="final-image" src="images/lose1.gif" alt="Résultat" style="width:120px; display:block; margin: -15px auto 20px;">
-    <p id="final-score">Score : 0 sur <span id="total-questions-result"></span></p>
+    <p id="final-score">Score : 0 sur 3</p>
     <button id="restart-btn" style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 3px 3px 5px black;">RECOMMENCER</button>
   </div>
   
   <script>
-    // Mise à jour du nombre total de questions
-    const totalQuestionsSpan = document.getElementById("total-questions");
-    const totalQuestionsResult = document.getElementById("total-questions-result");
+    document.addEventListener("DOMContentLoaded", function() {
+      var decorImage = document.querySelector('.pikachu');
+      if (decorImage) {
+        decorImage.src = "images/decor1.gif";
+        decorImage.style.width = "235px";
+        setTimeout(function(){
+          decorImage.src = "images/decor2.gif";
+          decorImage.style.width = "235px";
+        }, 5000);
+      }
+    });
     
-    // Données du quiz générées à partir du questionnaire
+    // Données du quiz
     const quizData = [
       {
-        question: "Quelles sont les trois conditions nécessaires à la formation d’un feu (triangle du feu) ?",
-        options: [
-          "Un combustible",
-          "Un comburant (souvent l’oxygène de l’air)",
-          "Une énergie d’activation (chaleur, flamme…)",
-          "Un refroidissement constant"
-        ],
-        correctAnswers: [
-          "Un combustible",
-          "Un comburant (souvent l’oxygène de l’air)",
-          "Une énergie d’activation (chaleur, flamme…)"
-        ]
+        question: "Sur quel feu peut-on utiliser un extincteur à eau pulvérisée avec additif ?",
+        options: ["Feu de classe A", "Feu de classe B", "Feu de classe C", "Feu de classe D"],
+        correctAnswers: ["Feu de classe A", "Feu de classe B"]
       },
       {
-        question: "Quelle est la définition du feu ?",
-        options: [
-          "Une réaction de fusion des matériaux",
-          "Une réaction d’oxydation exothermique",
-          "Un simple changement d’état de la matière",
-          "Un phénomène réversible sans production de chaleur"
-        ],
-        correctAnswers: ["Une réaction d’oxydation exothermique"]
+        question: "Que signifie le signal d'alarme incendie ?",
+        options: ["Évacuation immédiate", "Appeler le service incendie", "Rester à votre poste", "Ignorer le signal"],
+        correctAnswers: ["Évacuation immédiate"]
+      },
+      {
+        question: "Quel équipement de sécurité incendie est obligatoire dans un établissement ?",
+        options: ["Extincteur", "Détecteur de fumée", "Réseau d'alarme", "Toutes les réponses"],
+        correctAnswers: ["Toutes les réponses"]
       }
-      // ... (le reste des questions)
     ];
     
-    totalQuestionsSpan.textContent = quizData.length;
-    totalQuestionsResult.textContent = quizData.length;
-    
-    // Initialisation des variables du quiz
     let currentQuestion = 0;
     let score = 0;
     let isMuted = false;
     
-    // Références aux éléments HTML
+    // Références aux éléments
     const homeDiv = document.getElementById("home");
     const quizContainer = document.getElementById("quiz-container");
     const resultPage = document.getElementById("result-page");
@@ -551,20 +676,12 @@
     const startSound = document.getElementById("start-sound");
     const correctSound = document.getElementById("correct-sound");
     const incorrectSound = document.getElementById("incorrect-sound");
-    const incorrectSound2 = document.getElementById("incorrect-sound2");
-    
-    // Préchargement des images
-    const preloadImages = ["images/ryu.gif", "images/ken.gif", "images/ryu2.gif", "images/ken2.gif"];
-    preloadImages.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
     
     // Fonction de basculement mute
     function muteToggleHandler() {
       isMuted = !isMuted;
       [startSound, correctSound, incorrectSound, checkboxSound,
-       incorrectSound2,
+       document.getElementById("incorrect-sound2"),
        document.getElementById("perfect-sound"),
        document.getElementById("imperfect-sound")
       ].forEach(audio => { audio.muted = isMuted; });
@@ -593,7 +710,7 @@
         screen.orientation.lock("portrait").catch(error => { console.log("Le verrouillage de l'orientation a échoué :", error); });
       }
       startSound.play();
-      startBtn.style.boxShadow = "0 0 20px rgba(0,255,0,1)";
+      startBtn.style.boxShadow = "0 0 20px rgba(0, 255, 0, 1)";
       startBtn.style.animation = "blink 0.3s infinite ease-in-out";
       setTimeout(() => {
         startBtn.style.animation = "glow-green 1.5s infinite ease-in-out";
@@ -602,15 +719,14 @@
         currentQuestion = 0;
         score = 0;
         showQuestion();
-      }, 1500);
+      }, 2000);
     });
     
-    // Affichage d'une question
+    // Affichage de la question
     function showQuestion() {
       resultDiv.innerHTML = "";
-      validateBtn.style.display = "block";
       const data = quizData[currentQuestion];
-      questionCounterEl.textContent = `Question ${currentQuestion + 1} / ${quizData.length}`;
+      questionCounterEl.textContent = `${currentQuestion + 1} / ${quizData.length}`;
       questionTextEl.textContent = data.question;
       optionsDiv.innerHTML = "";
       data.options.forEach((option, index) => {
@@ -634,7 +750,7 @@
       });
     }
     
-    // Fonction de comparaison des tableaux (ordre sans importance)
+    // Comparaison des tableaux
     function arraysEqual(a, b) {
       if (a.length !== b.length) return false;
       const sortedA = a.slice().sort();
@@ -642,7 +758,7 @@
       return sortedA.every((val, index) => val === sortedB[index]);
     }
     
-    // Traitement de la validation de la réponse
+    const incorrectSound2 = document.getElementById("incorrect-sound2");
     validateBtn.addEventListener("click", () => {
       const data = quizData[currentQuestion];
       const selected = Array.from(document.querySelectorAll('input[name="option"]:checked')).map(el => el.value);
@@ -652,17 +768,19 @@
       }
       const isCorrect = arraysEqual(selected, data.correctAnswers);
       validateBtn.style.display = "none";
+      
       if (isCorrect) {
         score++;
         correctSound.currentTime = 0;
         correctSound.play();
-        resultDiv.innerHTML = `
-          <div class="correct-container">
-            <img src="images/ryu.gif" alt="Décoration gauche" class="decor-left">
-            <img src="images/correct.png" alt="Bonne réponse" class="result-image correct">
-            <img src="images/ken.gif" alt="Décoration droite" class="decor-right">
-          </div>
-        `;
+        resultDiv.innerHTML = 
+          `<div class="correct-container">
+             <img src="images/ryu.gif" alt="Décoration gauche" class="decor-left">
+             <img src="images/correct.png" alt="Bonne réponse" class="result-image correct">
+             <img src="images/ken.gif" alt="Décoration droite" class="decor-right">
+           </div>`;
+        
+        // Passage automatique à la question suivante après 2 secondes
         setTimeout(() => {
           currentQuestion++;
           if (currentQuestion < quizData.length) {
@@ -672,30 +790,52 @@
             showResultPage();
           }
         }, 2000);
+        
       } else {
-        // En cas de réponse incorrecte, jouer un son d'erreur et afficher les images
+        // Réponse incorrecte
         const selectedSound = (Math.random() < 0.5) ? incorrectSound : incorrectSound2;
         selectedSound.currentTime = 0;
         selectedSound.play();
-        resultDiv.innerHTML = `
-          <div class="incorrect-container">
-            <img src="images/ryu2.png" alt="Décoration gauche" class="decor-leftX">
-            <img src="images/incorrect.png" alt="Mauvaise réponse" class="result-image incorrect">
-            <img src="images/ken2.png" alt="Décoration droite" class="decor-rightX">
-          </div>
-          <div class="incorrect-answer-header">Réponse :</div>
-          <div class="incorrect-answer-text">${data.correctAnswers.join(", ")}</div>
-        `;
-        // Après 2 secondes, remplacer le bloc par le bouton "Suivant" et un conteneur affichant la réponse
+        resultDiv.innerHTML = 
+          `<div class="incorrect-container">
+             <img src="images/ryu2.png" alt="Décoration gauche" class="decor-leftX">
+             <img src="images/incorrect.png" alt="Mauvaise réponse" class="result-image incorrect">
+             <img src="images/ken2.png" alt="Décoration droite" class="decor-rightX">
+           </div>
+           <div class="incorrect-answer-header">Réponse :</div>
+           <div class="incorrect-answer-text">${data.correctAnswers.join(", ")}</div>`;
+        
+        // Après 2 secondes, remplacer l'image incorrecte par un bouton "Suivant"
         setTimeout(() => {
-          resultDiv.innerHTML = `
-            <button id="next-btn">${validateBtn.textContent}</button>
-            <div class="incorrect-answer-wrapper">
-              <div class="incorrect-answer-header">Réponse :</div>
-              <div class="incorrect-answer-text">${data.correctAnswers.join(", ")}</div>
-            </div>
-          `;
-          document.getElementById("next-btn").addEventListener("click", () => {
+          // On retire les images de décoration
+          const incorrectContainer = document.querySelector(".incorrect-container");
+          if (incorrectContainer) {
+            incorrectContainer.innerHTML = "";
+          }
+          
+          // Création du bouton "Suivant" (visuellement similaire au bouton "Valider")
+          const nextBtn = document.createElement("button");
+          nextBtn.id = "next-btn";
+          nextBtn.textContent = "Suivant";
+          nextBtn.style.fontWeight = "bold";
+          nextBtn.style.margin = "0 auto";
+          nextBtn.style.marginTop = "30px";
+          nextBtn.style.display = "block";
+          nextBtn.style.padding = "15px 25px";
+          nextBtn.style.fontSize = "25px";
+          nextBtn.style.border = "3px solid #08ff08";
+          nextBtn.style.borderRadius = "10px";
+          nextBtn.style.backgroundColor = "#1a1d21";
+          nextBtn.style.color = "white";
+          nextBtn.style.cursor = "pointer";
+          nextBtn.style.transition = "transform 0.1s ease, box-shadow 0.1s ease";
+          nextBtn.style.animation = "borderGlow 2s ease-in-out infinite";
+          
+          resultDiv.appendChild(nextBtn);
+          
+          // Au clic sur "Suivant", passer à la question suivante
+          nextBtn.addEventListener("click", () => {
+            nextBtn.remove();
             currentQuestion++;
             if (currentQuestion < quizData.length) {
               showQuestion();
@@ -704,6 +844,7 @@
               showResultPage();
             }
           });
+          
         }, 2000);
       }
     });
@@ -715,68 +856,74 @@
       const resultHeader = document.getElementById("result-header");
       if (score === quizData.length) {
         restartBtn.style.animation = "borderGlowGreen 2s ease-in-out infinite";
-        resultPage.style.backgroundImage = "url('images/wall.png')";
+        resultPage.style.background = "linear-gradient(135deg, #2196F3, #0D47A1)";
         resultHeader.src = "images/youwin.png";
+        resultHeader.style.transform = "translateX(0)";
         resultHeader.style.marginTop = "10px";
         resultHeader.classList.add("victory-animation");
         finalScoreEl.style.color = "#00ff1a";
         finalImage.classList.add("raised");
         finalImage.style.width = (window.innerWidth <= 480) ? "150px" : "190px";
+        
+        // Ajout de l'overlay GIF de victoire
+        if (!document.getElementById("confet-overlay")) {
+          let overlay = document.createElement("img");
+          overlay.id = "confet-overlay";
+          overlay.src = "images/confet.gif"; 
+          overlay.alt = "Overlay de victoire";
+          overlay.style.position = "absolute";
+          overlay.style.top = "0";
+          overlay.style.left = "0";
+          overlay.style.width = "100%";
+          overlay.style.height = "100%";
+          overlay.style.objectFit = "cover";
+          overlay.style.zIndex = "5";
+          resultPage.appendChild(overlay);
+        }
+      } else {
+        restartBtn.style.animation = "borderGlow2 2s ease-in-out infinite";
+        resultPage.style.background = "black";
+        resultHeader.src = "images/tryagain.png";
+        resultHeader.style.transform = "translateX(0)";
+        resultHeader.style.marginTop = "10px";
+        finalScoreEl.style.color = "red";
+        resultHeader.classList.add("windmill-shake");
+        finalImage.classList.remove("raised");
+        finalImage.style.width = "190px";
+        finalImage.style.transform = "";
+        setInterval(() => {
+          resultHeader.classList.remove("windmill-shake");
+          void resultHeader.offsetWidth;
+          resultHeader.classList.add("windmill-shake");
+        }, 2800);
+      }
+      resultPage.style.backgroundSize = "cover";
+      resultPage.style.backgroundPosition = "center";
+      finalScoreEl.textContent = `Score : ${score} sur ${quizData.length}`;
+      finalImage.src = (score === quizData.length)
+        ? "images/perfect.gif"
+        : ((Math.random() < 0.5) ? "images/lose1.gif" : "images/lose2.gif");
+      
+      if (finalImage.src.indexOf("lose1.gif") !== -1 && window.innerWidth <= 480) {
+        finalImage.style.transform = "translateY(-10px)";
+      } else {
+        finalImage.style.transform = "";
+      }
+      
+      if (score === quizData.length) {
         document.getElementById("perfect-sound").currentTime = 0;
         document.getElementById("perfect-sound").play();
       } else {
-        restartBtn.style.animation = "borderGlow2 2s ease-in-out infinite";
-        resultPage.style.backgroundImage = "url('images/wall2.png')";
-        resultHeader.src = "images/tryagain.png";
-        resultHeader.classList.add("windmill-shake");
-        finalScoreEl.style.color = "red";
-        finalImage.classList.remove("raised");
-        finalImage.style.width = "190px";
         document.getElementById("imperfect-sound").currentTime = 0;
         document.getElementById("imperfect-sound").play();
       }
-      finalScoreEl.textContent = `Score : ${score} sur ${quizData.length}`;
-      resultPage.style.backgroundSize = "cover";
-      resultPage.style.backgroundPosition = "center";
     }
     
     restartBtn.addEventListener("click", () => { window.location.reload(); });
-    
     document.addEventListener("DOMContentLoaded", function() {
-      var decorImage = document.querySelector('.pikachu');
-      if (decorImage) {
-        var decorGifs = ["images/decor1.gif", "images/decor2.gif"];
-        var randomIndex = Math.floor(Math.random() * decorGifs.length);
-        var randomGif = decorGifs[randomIndex];
-        decorImage.src = randomGif;
-        decorImage.style.visibility = 'visible';
-      }
-    });
-    
-    document.addEventListener("DOMContentLoaded", function() {
-      const audios = document.querySelectorAll("audio");
-      audios.forEach(audio => {
-        const initialVolume = audio.volume;
-        audio.volume = 0;
-        audio.play().then(() => {
-          audio.pause();
-          audio.currentTime = 0;
-          audio.volume = initialVolume;
-        }).catch(error => {
-          console.error("Erreur lors du préchargement audio:", error);
-          audio.volume = initialVolume;
-        });
-      });
-    });
-    
-    document.addEventListener("DOMContentLoaded", function() {
-      var decorImage = document.querySelector('.pikachu');
-      if (decorImage) {
-        var decorGifs = ["images/decor1.gif", "images/decor2.gif"];
-        var randomIndex = Math.floor(Math.random() * decorGifs.length);
-        var randomGif = decorGifs[randomIndex];
-        decorImage.src = randomGif + '?t=' + new Date().getTime();
-        decorImage.style.visibility = 'visible';
+      var vidget = document.querySelector('.vidget');
+      if (vidget) {
+        vidget.src = "images/vidget.gif?t=" + new Date().getTime();
       }
     });
   </script>
