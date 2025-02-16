@@ -802,49 +802,53 @@
              <img src="images/incorrect.png" alt="Mauvaise réponse" class="result-image incorrect">
              <img src="images/ken2.png" alt="Décoration droite" class="decor-rightX">
            </div>
+           <!-- Placeholder pour le bouton "Suivant" -->
+           <div id="next-button-placeholder"></div>
            <div class="incorrect-answer-header">Réponse :</div>
            <div class="incorrect-answer-text">${data.correctAnswers.join(", ")}</div>`;
         
-        // Après 2 secondes, remplacer l'image incorrecte par un bouton "Suivant"
+        // Après 2 secondes, remplacer les images décoratives par le bouton "Suivant"
         setTimeout(() => {
-          // On retire les images de décoration
+          // Retirer les images de décoration
           const incorrectContainer = document.querySelector(".incorrect-container");
           if (incorrectContainer) {
             incorrectContainer.innerHTML = "";
           }
           
-          // Création du bouton "Suivant" (visuellement similaire au bouton "Valider")
-          const nextBtn = document.createElement("button");
-          nextBtn.id = "next-btn";
-          nextBtn.textContent = "Suivant";
-          nextBtn.style.fontWeight = "bold";
-          nextBtn.style.margin = "0 auto";
-          nextBtn.style.marginTop = "30px";
-          nextBtn.style.display = "block";
-          nextBtn.style.padding = "15px 25px";
-          nextBtn.style.fontSize = "25px";
-          nextBtn.style.border = "3px solid #08ff08";
-          nextBtn.style.borderRadius = "10px";
-          nextBtn.style.backgroundColor = "#1a1d21";
-          nextBtn.style.color = "white";
-          nextBtn.style.cursor = "pointer";
-          nextBtn.style.transition = "transform 0.1s ease, box-shadow 0.1s ease";
-          nextBtn.style.animation = "borderGlow 2s ease-in-out infinite";
-          
-          resultDiv.appendChild(nextBtn);
-          
-          // Au clic sur "Suivant", passer à la question suivante
-          nextBtn.addEventListener("click", () => {
-            nextBtn.remove();
-            currentQuestion++;
-            if (currentQuestion < quizData.length) {
-              showQuestion();
-              validateBtn.style.display = "block";
-            } else {
-              showResultPage();
-            }
-          });
-          
+          // Insérer le bouton "Suivant" dans le placeholder
+          const nextPlaceholder = document.getElementById("next-button-placeholder");
+          if (nextPlaceholder) {
+            const nextBtn = document.createElement("button");
+            nextBtn.id = "next-btn";
+            nextBtn.textContent = "Suivant";
+            nextBtn.style.fontWeight = "bold";
+            nextBtn.style.margin = "0 auto";
+            nextBtn.style.marginTop = "30px";
+            nextBtn.style.display = "block";
+            nextBtn.style.padding = "15px 25px";
+            nextBtn.style.fontSize = "25px";
+            nextBtn.style.border = "3px solid #08ff08";
+            nextBtn.style.borderRadius = "10px";
+            nextBtn.style.backgroundColor = "#1a1d21";
+            nextBtn.style.color = "white";
+            nextBtn.style.cursor = "pointer";
+            nextBtn.style.transition = "transform 0.1s ease, box-shadow 0.1s ease";
+            nextBtn.style.animation = "borderGlow 2s ease-in-out infinite";
+            
+            nextPlaceholder.appendChild(nextBtn);
+            
+            // Au clic sur "Suivant", passer à la question suivante
+            nextBtn.addEventListener("click", () => {
+              nextBtn.remove();
+              currentQuestion++;
+              if (currentQuestion < quizData.length) {
+                showQuestion();
+                validateBtn.style.display = "block";
+              } else {
+                showResultPage();
+              }
+            });
+          }
         }, 2000);
       }
     });
