@@ -553,10 +553,12 @@
           50%  { transform: translate(20px, 13px); }
           100% { transform: translate(20px, 3px); }
         }
-        @keyframes levitateRightX {
-          0%   { transform: translate(-20px, 3px); }
-          50%  { transform: translate(-20px, 13px); }
-          100% { transform: translate(-20px, 3px); }
+        @media (max-width: 480px) {
+          @keyframes levitateRightX {
+            0%   { transform: translate(-20px, 3px); }
+            50%  { transform: translate(-20px, 13px); }
+            100% { transform: translate(-20px, 3px); }
+          }
         }
       }
       @media (max-width: 480px) {
@@ -802,8 +804,8 @@
              <img src="images/incorrect.png" alt="Mauvaise réponse" class="result-image incorrect">
              <img src="images/ken2.png" alt="Décoration droite" class="decor-rightX">
            </div>
-           <!-- Placeholder pour le bouton "Suivant" -->
-           <div id="next-button-placeholder"></div>
+           <!-- Placeholder pour le bouton "Suivant" avec marge inférieure -->
+           <div id="next-button-placeholder" style="margin-bottom: 30px;"></div>
            <div class="incorrect-answer-header">Réponse :</div>
            <div class="incorrect-answer-text">${data.correctAnswers.join(", ")}</div>`;
         
