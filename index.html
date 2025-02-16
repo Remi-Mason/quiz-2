@@ -29,46 +29,44 @@
   <link rel="preload" as="image" href="images/lose2.gig">
   
   <style>
-
     /* Animations */
-	 @keyframes victoryAnimation {
-        0% { transform: scale(1) rotate(0deg); }
-        20% { transform: scale(1.1) rotate(3deg); }
-        40% { transform: scale(1) rotate(-3deg); }
-        60% { transform: scale(1.1) rotate(3deg); }
-        80% { transform: scale(1) rotate(-3deg); }
-        90% { transform: scale(1) rotate(0deg); }
-        100% { transform: scale(1) rotate(0deg); }
-      }
-      .victory-animation {
-        animation: victoryAnimation 2s ease-in-out infinite;
-        transform-origin: center;
-      }
-	@keyframes windmillShake {
-  0% { transform: rotate(0deg); }
-  15% { transform: rotate(15deg); }
-  30% { transform: rotate(-15deg); }
-  45% { transform: rotate(10deg); }
-  60% { transform: rotate(-10deg); }
-  75% { transform: rotate(5deg); }
-  90% { transform: rotate(-5deg); }
-  100% { transform: rotate(0deg); }
-}
-
-.windmill-shake {
-  animation: windmillShake 0.8s ease-in-out forwards !important;
-  transform-origin: center;
-}
-	 @keyframes levitateLeft {
-        0%   { transform: translate(40px, 0px); }
-        50%  { transform: translate(40px, -10px); } /* monte de 10px */
-        100% { transform: translate(40px, 0px); }
-      }
-      @keyframes levitateRight {
-        0%   { transform: translate(-40px, 0px); }
-        50%  { transform: translate(-40px, -10px); } /* monte de 10px */
-        100% { transform: translate(-40px, 0px); }
-      }
+    @keyframes victoryAnimation {
+      0% { transform: scale(1) rotate(0deg); }
+      20% { transform: scale(1.1) rotate(3deg); }
+      40% { transform: scale(1) rotate(-3deg); }
+      60% { transform: scale(1.1) rotate(3deg); }
+      80% { transform: scale(1) rotate(-3deg); }
+      90% { transform: scale(1) rotate(0deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+    .victory-animation {
+      animation: victoryAnimation 2s ease-in-out infinite;
+      transform-origin: center;
+    }
+    @keyframes windmillShake {
+      0% { transform: rotate(0deg); }
+      15% { transform: rotate(15deg); }
+      30% { transform: rotate(-15deg); }
+      45% { transform: rotate(10deg); }
+      60% { transform: rotate(-10deg); }
+      75% { transform: rotate(5deg); }
+      90% { transform: rotate(-5deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .windmill-shake {
+      animation: windmillShake 0.8s ease-in-out forwards !important;
+      transform-origin: center;
+    }
+    @keyframes levitateLeft {
+      0%   { transform: translate(40px, 0px); }
+      50%  { transform: translate(40px, -10px); }
+      100% { transform: translate(40px, 0px); }
+    }
+    @keyframes levitateRight {
+      0%   { transform: translate(-40px, 0px); }
+      50%  { transform: translate(-40px, -10px); }
+      100% { transform: translate(-40px, 0px); }
+    }
     @keyframes shake {
       0% { transform: translate(0, 0); }
       10% { transform: translate(-10px, -10px); }
@@ -114,7 +112,7 @@
       50%  { transform: translateY(-10px); }
       100% { transform: translateY(0); }
     }
-    /* Appliquer l'animation au titre */
+    /* Titre animé */
     .floating-title {
       position: relative;
       z-index: 3;
@@ -124,18 +122,15 @@
       max-width: 90%;
       width: auto;
     }
-    /* Pour centrer l'image décorative */
-
-.pikachu {
-  display: block;
-  margin: 0 auto;
-  transform: translateY(19px)!important;
-    transform: translateX(-3px);
-  width: 210px !important;
-  height: 192px !important;
-
-
-}
+    /* Image décorative */
+    .pikachu {
+      display: block;
+      margin: 0 auto;
+      transform: translateY(19px)!important;
+      transform: translateX(-3px);
+      width: 210px !important;
+      height: 192px !important;
+    }
     /* Centrage général des images de résultat */
     #result-header {
       display: block;
@@ -313,10 +308,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-	  margin-top: -30px;
+      margin-top: -30px;
     }
     .correct-decoration { width: 60px; }
-    /* Pour l'image de bonne réponse, largeur de 80px adaptée aux GIFs */
     .correct-container .result-image.correct {
       animation: popAnimation 0.5s ease-out;
       width: 80px;
@@ -333,7 +327,7 @@
       background: linear-gradient(135deg, #2196F3, #0D47A1);
       display: none; 
       position: relative;
-	  border: 3px solid white;
+      border: 3px solid white;
     }
     #result-page h2 { font-size: 24px; margin-bottom: 20px; }
     #final-score {
@@ -365,57 +359,13 @@
       position: relative;
       overflow: visible;
       animation: borderGlow2 2s ease-in-out infinite;
-       z-index: 6; 
+      z-index: 6; 
     }
     #restart-btn:active { transform: scale(0.95); }
-	 .incorrect-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-		margin-top: -40px;
-      }
-	  .decor-leftX, .decor-rightX {
-  width: 80px;
-  padding: 12px 0;
-}
- .decor-rightX {
-        width: 80px;
-        transform: translate(-30px, 3px);
-        z-index: 0;
-        padding: 12px 0px;
-		 animation: levitateRightX 1s ease-in-out infinite;
-      }
-      .decor-leftX {
-        width: 80px;
-        transform: translate(30px, 3px);
-        z-index: 0;
-        padding: 12px 0px;
-		 animation: levitateLeftX 1s ease-in-out infinite;
-      }
-	  .decor-right {
-  width: 80px;
-  transform: translate(-40px, -10px);
-  z-index: 0;
-  padding: 12px 0px;
-
-}
-.decor-left {
-  width: 80px;
-  transform: translate(40px, -10px);
-  z-index: 0;
-  padding: 12px 0px;
-
-}
-@keyframes levitateLeftX {
-  0%   { transform: translate(40px, 3px); }
-  50%  { transform: translate(40px, 13px); }
-  100% { transform: translate(40px, 3px); }
-}
-@keyframes levitateRightX {
-  0%   { transform: translate(-40px, 3px); }
-  50%  { transform: translate(-40px, 13px); }
-  100% { transform: translate(-40px, 3px); }
-}
+    /* Conteneur pour décaler le bloc "Réponse :" lorsque le bouton "Suivant" apparaît */
+    .incorrect-answer-wrapper {
+      margin-top: 20px; /* Ajustez cette valeur selon le rendu souhaité */
+    }
     /* Media Query pour mobile */
     @media (max-width: 480px) {
       .container {       
@@ -423,7 +373,6 @@
         max-width: 90%;
         padding: 30px;
       }
-      /* Vous pouvez retirer ou adapter cette règle si elle n'est plus nécessaire */
       #overlay {
         top: 85px !important;
         left: 50% !important;
@@ -432,20 +381,14 @@
       #question-text { font-size: 18px; }
       #final-score { font-size: 20px; }
       .floating-title { margin: 0 auto 0px; }
-      .pikachu {
-        display: block;
-      }
+      .pikachu { display: block; }
       .startu { border-radius: 10px; }
       .incorrect-container {
         display: flex;
         align-items: center;
         justify-content: center;
       }
-      .again {
-        display: block;
-        margin: 0 auto 0px;
-		
-      }
+      .again { display: block; margin: 0 auto 0px; }
       @keyframes windmillShake {
         0% { transform: rotate(0deg); }
         15% { transform: rotate(15deg); }
@@ -482,7 +425,7 @@
           display: block;
           margin: 0 auto;
           width: 290px;
-          height: 215px;
+          height: auto;
         }
       }
       @media (max-width: 480px) {
@@ -505,7 +448,6 @@
           transform: translate(-20px, -5px);
           z-index: 0;
           padding: 12px 0px;
-
         }
       }
       @media (max-width: 480px) {      
@@ -514,7 +456,6 @@
           transform: translate(20px, -5px);
           z-index: 0;
           padding: 12px 0px;
-
         }
       }
       @media (max-width: 480px) {      
@@ -533,62 +474,27 @@
           padding: 12px 0px;
         }
       }
-
       @media (max-width: 480px) {
         .floating-title {
-          margin-top: -10px; /* Ajustez selon le rendu souhaité */
-		  margin-bottom: 15px;
-
+          margin-top: -10px;
+          margin-bottom: 15px;
         }
       }
- @media (max-width: 480px) {
- @keyframes levitateLeft {
-        0%   { transform: translate(20px, 0px); }
-        50%  { transform: translate(20px, -15px); } /* monte de 10px */
-        100% { transform: translate(20px, 0px); }
+      @media (max-width: 480px) {
+        #question-text { font-size: 22px; }
       }
-      @keyframes levitateRight {
-        0%   { transform: translate(-20px, 0px); }
-        50%  { transform: translate(-20px, -15px); } /* monte de 10px */
-        100% { transform: translate(-20px, 0px); }
+      @media (max-width: 480px) {	  
+        #result-header {
+          margin: 0 auto 50px !important;
+          width: 85%;
+        }
       }
-}
- @media (max-width: 480px) {
-@keyframes levitateLeftX {
-  0%   { transform: translate(20px, 3px); }
-  50%  { transform: translate(20px, 13px); }
-  100% { transform: translate(20px, 3px); }
-}
- @media (max-width: 480px) {
-@keyframes levitateRightX {
-  0%   { transform: translate(-20px, 3px); }
-  50%  { transform: translate(-20px, 13px); }
-  100% { transform: translate(-20px, 3px); }
-}
-}
-.centipod {
-  display: block;
-  margin: 0 auto;
-}
-.vidget {
-  display: block;
-  margin: 0 auto;
-}
-@media (max-width: 480px) {
-  #question-text { font-size: 22px; }
-}
-@media (max-width: 480px) {	  
-  #result-header {
-    display: block;
-    margin: 0 auto 50px !important; /* Augmente la marge inférieure */
-    width: 85%;
-  }
-}
-	 	 @media (max-width: 480px) {
-  #final-score {
-    font-size: 28px !important; /* Increase the font size as needed */
-  }
-}
+      @media (max-width: 480px) {
+        #final-score {
+          font-size: 28px !important;
+        }
+      }
+    }
   </style>
 </head>
 <body>
@@ -605,12 +511,12 @@
   <div class="container" id="home">
     <!-- Titre centré -->
     <img src="images/titre.png" alt="quiz ssiap1" class="floating-title">
-<img src="images/vidget.gif" alt="videx" class="vidget" style="display: block; margin: 40px auto; position: relative; top: -30px;">
+    <img src="images/vidget.gif" alt="videx" class="vidget" style="display: block; margin: 40px auto; position: relative; top: -30px;">
     <!-- Image décorative centrée -->
     <img src="images/decor.gif" alt="pik" class="pikachu" style="display: none; z-index: 3;">
-    <!-- Image GBC en tant qu'image normale (non overlay) -->
-<img src="images/GBC.png" alt="GBC" style="display: none; margin: -200px auto 0 auto; border: 3px solid black; width: 290px; height: auto; position: relative; z-index: 2;">
-    <!-- Bouton mute et bouton start… -->
+    <!-- Image GBC en tant qu'image normale -->
+    <img src="images/GBC.png" alt="GBC" style="display: none; margin: -200px auto 0 auto; border: 3px solid black; width: 290px; height: auto; position: relative; z-index: 2;">
+    <!-- Bouton mute et bouton start -->
     <img id="mute-btn" src="images/mute-off.gif" alt="Son activé" style="cursor: pointer; width: 30px; height: 25px; margin-bottom: 20px; margin-top: 25px;">
     <button id="start-btn"><img src="images/start.png" style="margin-bottom: -30px; width: 120px"></button>
   </div>
@@ -635,17 +541,18 @@
   </div>
   
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-  var decorImage = document.querySelector('.pikachu');
-  if (decorImage) {
-    decorImage.src = "images/decor1.gif";
-    decorImage.style.width = "235px";
-    setTimeout(function(){
-       decorImage.src = "images/decor2.gif";
-       decorImage.style.width = "235px";
-    }, 5000);
-  }
-});
+    document.addEventListener("DOMContentLoaded", function() {
+      var decorImage = document.querySelector('.pikachu');
+      if (decorImage) {
+        decorImage.src = "images/decor1.gif";
+        decorImage.style.width = "235px";
+        setTimeout(function(){
+          decorImage.src = "images/decor2.gif";
+          decorImage.style.width = "235px";
+        }, 5000);
+      }
+    });
+    
     // Données du quiz
     const quizData = [
       {
@@ -707,15 +614,15 @@
       }
     }
     muteBtn.addEventListener("click", muteToggleHandler);
-	document.addEventListener("DOMContentLoaded", function() {
-  var muteImg = document.getElementById("mute-btn");
-  if (muteImg && muteImg.src.indexOf(".gif") !== -1) {
-    var newMuteImg = muteImg.cloneNode(true);
-    newMuteImg.src = newMuteImg.src.split('?')[0] + '?t=' + new Date().getTime();
-    muteImg.parentNode.replaceChild(newMuteImg, muteImg);
-    newMuteImg.addEventListener("click", muteToggleHandler);
-  }
-});
+    document.addEventListener("DOMContentLoaded", function() {
+      var muteImg = document.getElementById("mute-btn");
+      if (muteImg && muteImg.src.indexOf(".gif") !== -1) {
+        var newMuteImg = muteImg.cloneNode(true);
+        newMuteImg.src = newMuteImg.src.split('?')[0] + '?t=' + new Date().getTime();
+        muteImg.parentNode.replaceChild(newMuteImg, muteImg);
+        newMuteImg.addEventListener("click", muteToggleHandler);
+      }
+    });
     
     // Démarrage du quiz
     startBtn.addEventListener("click", () => {
@@ -750,7 +657,10 @@
         checkbox.value = option;
         checkbox.name = "option";
         checkbox.id = `option_${index}`;
-        checkbox.addEventListener("click", () => { checkboxSound.currentTime = 0; checkboxSound.play(); });
+        checkbox.addEventListener("click", () => { 
+          checkboxSound.currentTime = 0; 
+          checkboxSound.play(); 
+        });
         const label = document.createElement("label");
         label.htmlFor = `option_${index}`;
         label.textContent = option;
@@ -772,7 +682,10 @@
     validateBtn.addEventListener("click", () => {
       const data = quizData[currentQuestion];
       const selected = Array.from(document.querySelectorAll('input[name="option"]:checked')).map(el => el.value);
-      if (selected.length === 0) { alert("Veuillez sélectionner au moins une réponse"); return; }
+      if (selected.length === 0) { 
+        alert("Veuillez sélectionner au moins une réponse"); 
+        return; 
+      }
       const isCorrect = arraysEqual(selected, data.correctAnswers);
       validateBtn.style.display = "none";
       if (isCorrect) {
@@ -786,10 +699,15 @@
             <img src="images/ken.gif" alt="Décoration droite" class="decor-right">
           </div>
         `;
-        let ryuGif = document.querySelector('.decor-left');
-        let kenGif = document.querySelector('.decor-right');
-        if (ryuGif) { let originalSrc = ryuGif.src.split('?')[0]; ryuGif.src = originalSrc + '?t=' + new Date().getTime(); }
-        if (kenGif) { let originalSrc = kenGif.src.split('?')[0]; kenGif.src = originalSrc + '?t=' + new Date().getTime(); }
+        setTimeout(() => {
+          currentQuestion++;
+          if (currentQuestion < quizData.length) {
+            showQuestion();
+            validateBtn.style.display = "block";
+          } else {
+            showResultPage();
+          }
+        }, 2000);
       } else {
         const selectedSound = (Math.random() < 0.5) ? incorrectSound : incorrectSound2;
         selectedSound.currentTime = 0;
@@ -803,21 +721,26 @@
           <div class="incorrect-answer-header">Réponse :</div>
           <div class="incorrect-answer-text">${data.correctAnswers.join(", ")}</div>
         `;
-        let ryu2Gif = document.querySelector('.decor-leftX');
-        let ken2Gif = document.querySelector('.decor-rightX');
-        if (ryu2Gif) { let originalSrc = ryu2Gif.src.split('?')[0]; ryu2Gif.src = originalSrc + '?t=' + new Date().getTime(); }
-        if (ken2Gif) { let originalSrc = ken2Gif.src.split('?')[0]; ken2Gif.src = originalSrc + '?t=' + new Date().getTime(); }
+        // Après 2 secondes, remplacer le contenu par le bouton "Suivant" et le conteneur pour le texte
+        setTimeout(() => {
+          resultDiv.innerHTML = `
+            <button id="next-btn">Suivant</button>
+            <div class="incorrect-answer-wrapper">
+              <div class="incorrect-answer-header">Réponse :</div>
+              <div class="incorrect-answer-text">${data.correctAnswers.join(", ")}</div>
+            </div>
+          `;
+          document.getElementById("next-btn").addEventListener("click", () => {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+              showQuestion();
+              validateBtn.style.display = "block";
+            } else {
+              showResultPage();
+            }
+          });
+        }, 2000);
       }
-      const delayTime = isCorrect ? 2000 : 3000;
-      setTimeout(() => {
-        currentQuestion++;
-        if (currentQuestion < quizData.length) {
-          showQuestion();
-          validateBtn.style.display = "block";
-        } else {
-          showResultPage();
-        }
-      }, delayTime);
     });
     
     // Affichage de la page finale
@@ -836,13 +759,12 @@
         finalImage.classList.add("raised");
         finalImage.style.width = (window.innerWidth <= 480) ? "150px" : "190px";
         
-        // --- Ajout de l'overlay GIF de victoire ---
+        // Ajout de l'overlay GIF de victoire
         if (!document.getElementById("confet-overlay")) {
           let overlay = document.createElement("img");
           overlay.id = "confet-overlay";
           overlay.src = "images/confet.gif"; 
           overlay.alt = "Overlay de victoire";
-          // Positionner l'overlay pour qu'il couvre tout le container
           overlay.style.position = "absolute";
           overlay.style.top = "0";
           overlay.style.left = "0";
@@ -869,35 +791,36 @@
           resultHeader.classList.add("windmill-shake");
         }, 2800);
       }
-resultPage.style.backgroundSize = "cover";
-resultPage.style.backgroundPosition = "center";
-finalScoreEl.textContent = `Score : ${score} sur ${quizData.length}`;
-finalImage.src = (score === quizData.length)
-  ? "images/perfect.gif"
-  : ((Math.random() < 0.5) ? "images/lose1.gif" : "images/lose2.gif");
-
-// Appliquer une transformation spécifique si c'est lose1.gif sur mobile
-if (finalImage.src.indexOf("lose1.gif") !== -1 && window.innerWidth <= 480) {
-  finalImage.style.transform = "translateY(-10px)"; // remonter de 20px
-} else {
-  finalImage.style.transform = "";
-}
-
-if (score === quizData.length) {
-  document.getElementById("perfect-sound").currentTime = 0;
-  document.getElementById("perfect-sound").play();
-} else {
-  document.getElementById("imperfect-sound").currentTime = 0;
-  document.getElementById("imperfect-sound").play();
-}
-  }  
+      resultPage.style.backgroundSize = "cover";
+      resultPage.style.backgroundPosition = "center";
+      finalScoreEl.textContent = `Score : ${score} sur ${quizData.length}`;
+      finalImage.src = (score === quizData.length)
+        ? "images/perfect.gif"
+        : ((Math.random() < 0.5) ? "images/lose1.gif" : "images/lose2.gif");
+    
+      if (finalImage.src.indexOf("lose1.gif") !== -1 && window.innerWidth <= 480) {
+        finalImage.style.transform = "translateY(-10px)";
+      } else {
+        finalImage.style.transform = "";
+      }
+    
+      if (score === quizData.length) {
+        document.getElementById("perfect-sound").currentTime = 0;
+        document.getElementById("perfect-sound").play();
+      } else {
+        document.getElementById("imperfect-sound").currentTime = 0;
+        document.getElementById("imperfect-sound").play();
+      }
+    }
+    
     restartBtn.addEventListener("click", () => { window.location.reload(); });
-document.addEventListener("DOMContentLoaded", function() {
-  var vidget = document.querySelector('.vidget');
-  if (vidget) {
-    vidget.src = "images/vidget.gif?t=" + new Date().getTime();
-  }
-});
+    
+    document.addEventListener("DOMContentLoaded", function() {
+      var vidget = document.querySelector('.vidget');
+      if (vidget) {
+        vidget.src = "images/vidget.gif?t=" + new Date().getTime();
+      }
+    });
   </script>
 </body>
 </html>
