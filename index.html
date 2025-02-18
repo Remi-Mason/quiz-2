@@ -1412,6 +1412,13 @@ shuffleArray(quizData);
         });
       });
     });
+	  if (/Mobi|Android/i.test(navigator.userAgent)) {
+  window.addEventListener('beforeunload', function (e) {
+    // Certains navigateurs mobiles n'affichent pas de message personnalisé
+    e.preventDefault();
+    e.returnValue = "Attention, actualiser la page réinitialisera votre quiz. Êtes-vous sûr ?";
+  });
+}
   </script>
 </body>
 </html>
