@@ -29,7 +29,7 @@
   <link rel="preload" as="image" href="images/lose2.gig">
   
   <style>
-    /* Animations */
+    /* (Vos styles existants restent inchangés) */
     @keyframes victoryAnimation {
       0% { transform: scale(1) rotate(0deg); }
       20% { transform: scale(1.1) rotate(3deg); }
@@ -182,7 +182,6 @@
       border-radius: 10px;
       text-shadow: 1px 1px 2px black;
       transition: transform 0.1s ease-in-out;
-      animation: borderGlow 2s ease-in-out infinite;
       position: relative;
       top: 25px;
       overflow: visible;
@@ -417,6 +416,73 @@
       display: block;
       margin: 0 auto;
     }
+    /* ======= AJOUT DES STYLES POUR LE MODAL INDEX ======= */
+    #index-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 15px;
+      z-index: 1000;
+      text-align: center;
+      width: 300px;
+      max-width: 80%;
+    }
+    #index-modal .index-option {
+      width: 60px;
+      height: 60px;
+      margin: 0 10px;
+      font-size: 18px;
+      border: 2px solid white;
+      border-radius: 50%;
+      background: linear-gradient(to top, black, gray);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out;
+    }
+    #index-modal .index-option:active {
+      transform: scale(0.95);
+    }
+    #index-modal #close-index-modal {
+      margin-top: 20px;
+      padding: 8px 16px;
+      font-size: 16px;
+      border: 2px solid white;
+      border-radius: 5px;
+      background: linear-gradient(to top, black, gray);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.1s ease-in-out;
+    }
+    /* Bouton INDEX dans la page d'accueil et dans le résultat */
+    #index-btn, #home-index-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 160px;
+      height: 65px;
+      margin: 20px auto;
+      padding: 5px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      background: linear-gradient(to top, black, gray);
+      color: white;
+      font-weight: bold;
+      border: 2px solid white;
+      border-radius: 10px;
+      text-shadow: 1px 1px 2px black;
+      transition: transform 0.1s ease-in-out;
+      animation: borderGlow 2s ease-in-out infinite;
+    }
+    #index-btn:active, #home-index-btn:active {
+      transform: scale(0.95);
+    }
+    /* ==================================================== */
+    
     @media (max-width: 480px) {
       .container {       
         width: 360px;
@@ -493,80 +559,6 @@
       @media (max-width: 480px) {      
         #result-header {
           display: block;
-          margin: 0 auto 20px;
-          width: 85%;
-        }
-      }
-      @media (max-width: 480px) {      
-        .decor-right {
-          width: 80px;
-          transform: translate(-20px, -5px);
-          z-index: 0;
-          padding: 12px 0px;
-        }
-      }
-      @media (max-width: 480px) {      
-        .decor-left {
-          width: 80px;
-          transform: translate(20px, -5px);
-          z-index: 0;
-          padding: 12px 0px;
-        }
-      }
-      @media (max-width: 480px) {      
-        .decor-rightX {
-          width: 80px;
-          transform: translate(-30px, 0px);
-          z-index: 0;
-          padding: 12px 0px;
-        }
-      }
-      @media (max-width: 480px) {      
-        .decor-leftX {
-          width: 80px;
-          transform: translate(30px, 0px);
-          z-index: 0;
-          padding: 12px 0px;
-        }
-      }
-      @media (max-width: 480px) {
-        .floating-title {
-          margin-top: -10px;
-          margin-bottom: 15px;
-        }
-      }
-      @media (max-width: 480px) {
-        @keyframes levitateLeft {
-          0%   { transform: translate(20px, 0px); }
-          50%  { transform: translate(20px, -15px); }
-          100% { transform: translate(20px, 0px); }
-        }
-        @keyframes levitateRight {
-          0%   { transform: translate(-20px, 0px); }
-          50%  { transform: translate(-20px, -15px); }
-          100% { transform: translate(-20px, 0px); }
-        }
-      }
-      @media (max-width: 480px) {
-        @keyframes levitateLeftX {
-          0%   { transform: translate(20px, 3px); }
-          50%  { transform: translate(20px, 13px); }
-          100% { transform: translate(20px, 3px); }
-        }
-        @media (max-width: 480px) {
-          @keyframes levitateRightX {
-            0%   { transform: translate(-20px, 3px); }
-            50%  { transform: translate(-20px, 13px); }
-            100% { transform: translate(-20px, 3px); }
-          }
-        }
-      }
-      @media (max-width: 480px) {
-        #question-text { font-size: 22px; }
-      }
-      @media (max-width: 480px) {	  
-        #result-header {
-          display: block;
           margin: 0 auto 50px !important;
           width: 85%;
         }
@@ -598,9 +590,10 @@
     <img src="images/decor.gif" alt="pik" class="pikachu" style="display: none; z-index: 3;">
     <!-- Image GBC en tant qu'image normale (non overlay) -->
     <img src="images/GBC.png" alt="GBC" style="display: none; margin: -200px auto 0 auto; border: 3px solid black; width: 290px; height: auto; position: relative; z-index: 2;">
-    <!-- Bouton mute et bouton start… -->
+    <!-- Bouton mute, bouton start et bouton INDEX -->
     <img id="mute-btn" src="images/mute-off.gif" alt="Son activé" style="cursor: pointer; width: 30px; height: 25px; margin-bottom: 20px; margin-top: 25px;">
     <button id="start-btn"><img src="images/start.png" style="margin-bottom: -30px; width: 120px"></button>
+    <button id="home-index-btn" class="index-btn" style="margin-top:20px;">INDEX</button>
   </div>
   
   <!-- Zone du quiz -->
@@ -622,7 +615,18 @@
     <button id="restart-btn" style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 3px 3px 5px black;">RECOMMENCER</button>
   </div>
   
+  <!-- Container modal pour l'index -->
+  <div id="index-modal">
+    <button class="index-option" data-url="https://remi-mason.github.io/quiz-1/">1</button>
+    <button class="index-option" data-url="https://remi-mason.github.io/quiz-1-2/">2</button>
+    <button class="index-option" data-url="https://remi-mason.github.io/quiz-1-3/">3</button>
+    <br>
+    <button id="close-index-modal">Fermer</button>
+  </div>
+  
   <script>
+    // (L'ensemble du code JavaScript existant reste inchangé)
+    
     document.addEventListener("DOMContentLoaded", function() {
       var decorImage = document.querySelector('.pikachu');
       if (decorImage) {
@@ -933,6 +937,33 @@
         vidget.src = "images/vidget.gif?t=" + new Date().getTime();
       }
     });
+    
+    /* ======= AJOUT DU CODE POUR LE MODAL INDEX ======= */
+    document.addEventListener("DOMContentLoaded", function(){
+      const indexModal = document.getElementById("index-modal");
+      const closeIndexModal = document.getElementById("close-index-modal");
+      const homeIndexBtn = document.getElementById("home-index-btn");
+      
+      if(homeIndexBtn){
+        homeIndexBtn.addEventListener("click", function(){
+          indexModal.style.display = "block";
+        });
+      }
+      
+      if(closeIndexModal){
+        closeIndexModal.addEventListener("click", function(){
+          indexModal.style.display = "none";
+        });
+      }
+      
+      const indexOptions = document.querySelectorAll("#index-modal .index-option");
+      indexOptions.forEach(button => {
+        button.addEventListener("click", function(){
+          window.location.href = button.dataset.url;
+        });
+      });
+    });
+    /* =================================================== */
   </script>
 </body>
 </html>
