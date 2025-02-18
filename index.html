@@ -583,7 +583,12 @@ transform: translateY(-240px) scale(0.95);
           font-size: 28px !important;
         }
       }
-    }
+  @media (max-width: 480px) {
+  #quiz-container {
+    max-height: 80vh; /* 80% de la hauteur de l'écran */
+    overflow-y: auto; /* Ajoute une barre de défilement verticale si nécessaire */
+  }
+}	  
   </style>
 </head>
 <body>
