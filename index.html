@@ -184,7 +184,7 @@
       overflow: visible;
     }
     #start-btn:active {
-      transform: translateY(20px) scale(0.95);
+      transform: translateY(30px) scale(0.95);
       animation: glow-green 1.5s infinite ease-in-out, blink 0.3s infinite ease-in-out;
     }
     #start-btn img {
@@ -216,7 +216,7 @@
 
     }
     #home-index-btn:active {
-transform: translateY(-240px) scale(0.95);
+transform: translateY(-220px) scale(0.95);
     }
     /* Zone du quiz */
     #quiz-container {
@@ -1245,7 +1245,7 @@ shuffleArray(quizData);
           } else {
             showResultPage();
           }
-        }, 2000);
+        }, 1000);
         
       } else {
         const selectedSound = (Math.random() < 0.5) ? incorrectSound : incorrectSound2;
