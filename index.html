@@ -29,7 +29,7 @@
   <link rel="preload" as="image" href="images/lose2.gig">
   
   <style>
-    /* (Vos styles existants restent inchangés) */
+    /* Vos styles existants restent inchangés */
     @keyframes victoryAnimation {
       0% { transform: scale(1) rotate(0deg); }
       20% { transform: scale(1.1) rotate(3deg); }
@@ -112,7 +112,6 @@
       50%  { transform: translateY(-10px); }
       100% { transform: translateY(0); }
     }
-    /* Appliquer l'animation au titre */
     .floating-title {
       position: relative;
       z-index: 3;
@@ -122,7 +121,6 @@
       max-width: 90%;
       width: auto;
     }
-    /* Pour centrer l'image décorative */
     .pikachu {
       display: block;
       margin: 0 auto;
@@ -131,12 +129,10 @@
       width: 210px !important;
       height: 192px !important;
     }
-    /* Centrage général des images de résultat */
     #result-header {
       display: block;
       margin: 0 auto 20px;
     }
-    /* Styles généraux */
     html, body {
       height: 100%;
       margin: 0;
@@ -198,6 +194,26 @@
       width: 140px;
       height: auto;
       pointer-events: none;
+    }
+    /* Bouton INDEX pour page d'accueil – petit et placé sous le bouton commencer */
+    #home-index-btn {
+      width: 80px;
+      height: 40px;
+      font-size: 14px;
+      margin: 10px auto 0;
+      display: block;
+      cursor: pointer;
+      background: linear-gradient(to top, black, gray);
+      color: white;
+      font-weight: bold;
+      border: 2px solid white;
+      border-radius: 10px;
+      text-shadow: 1px 1px 2px black;
+      transition: transform 0.1s ease-in-out;
+      animation: borderGlow 2s ease-in-out infinite;
+    }
+    #home-index-btn:active {
+      transform: scale(0.95);
     }
     /* Zone du quiz */
     #quiz-container {
@@ -310,7 +326,6 @@
       margin-top: -30px;
     }
     .correct-decoration { width: 60px; }
-    /* Pour l'image de bonne réponse, largeur de 80px adaptée aux GIFs */
     .correct-container .result-image.correct {
       animation: popAnimation 0.5s ease-out;
       width: 80px;
@@ -362,6 +377,26 @@
       z-index: 6; 
     }
     #restart-btn:active { transform: scale(0.95); }
+    /* Bouton INDEX sur la page de résultats – même style petit */
+    #result-index-btn {
+      width: 80px;
+      height: 40px;
+      font-size: 14px;
+      margin: 10px auto 0;
+      display: block;
+      cursor: pointer;
+      background: linear-gradient(to top, black, gray);
+      color: white;
+      font-weight: bold;
+      border: 2px solid white;
+      border-radius: 10px;
+      text-shadow: 1px 1px 2px black;
+      transition: transform 0.1s ease-in-out;
+      animation: borderGlow 2s ease-in-out infinite;
+    }
+    #result-index-btn:active {
+      transform: scale(0.95);
+    }
     .incorrect-container {
       display: flex;
       align-items: center;
@@ -416,7 +451,7 @@
       display: block;
       margin: 0 auto;
     }
-    /* ======= AJOUT DES STYLES POUR LE MODAL INDEX ======= */
+    /* ======= Styles pour le modal INDEX ======= */
     #index-modal {
       display: none;
       position: fixed;
@@ -457,29 +492,6 @@
       color: white;
       cursor: pointer;
       transition: transform 0.1s ease-in-out;
-    }
-    /* Bouton INDEX dans la page d'accueil et dans le résultat */
-    #index-btn, #home-index-btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 160px;
-      height: 65px;
-      margin: 20px auto;
-      padding: 5px 20px;
-      font-size: 18px;
-      cursor: pointer;
-      background: linear-gradient(to top, black, gray);
-      color: white;
-      font-weight: bold;
-      border: 2px solid white;
-      border-radius: 10px;
-      text-shadow: 1px 1px 2px black;
-      transition: transform 0.1s ease-in-out;
-      animation: borderGlow 2s ease-in-out infinite;
-    }
-    #index-btn:active, #home-index-btn:active {
-      transform: scale(0.95);
     }
     /* ==================================================== */
     
@@ -588,12 +600,12 @@
     <img src="images/vidget.gif" alt="videx" class="vidget" style="display: block; margin: 40px auto; position: relative; top: -30px;">
     <!-- Image décorative centrée -->
     <img src="images/decor.gif" alt="pik" class="pikachu" style="display: none; z-index: 3;">
-    <!-- Image GBC en tant qu'image normale (non overlay) -->
+    <!-- Image GBC (non overlay) -->
     <img src="images/GBC.png" alt="GBC" style="display: none; margin: -200px auto 0 auto; border: 3px solid black; width: 290px; height: auto; position: relative; z-index: 2;">
-    <!-- Bouton mute, bouton start et bouton INDEX -->
+    <!-- Bouton mute, bouton start et bouton INDEX (petit) -->
     <img id="mute-btn" src="images/mute-off.gif" alt="Son activé" style="cursor: pointer; width: 30px; height: 25px; margin-bottom: 20px; margin-top: 25px;">
     <button id="start-btn"><img src="images/start.png" style="margin-bottom: -30px; width: 120px"></button>
-    <button id="home-index-btn" class="index-btn" style="margin-top:20px;">INDEX</button>
+    <button id="home-index-btn">INDEX</button>
   </div>
   
   <!-- Zone du quiz -->
@@ -613,9 +625,11 @@
     <img id="final-image" src="images/lose1.gif" alt="Résultat" style="width:120px; display:block; margin: -15px auto 20px;">
     <p id="final-score">Score : 0 sur 3</p>
     <button id="restart-btn" style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 3px 3px 5px black;">RECOMMENCER</button>
+    <!-- Bouton INDEX ajouté sur la page de résultats -->
+    <button id="result-index-btn">INDEX</button>
   </div>
   
-  <!-- Container modal pour l'index -->
+  <!-- Modal INDEX -->
   <div id="index-modal">
     <button class="index-option" data-url="https://remi-mason.github.io/quiz-1/">1</button>
     <button class="index-option" data-url="https://remi-mason.github.io/quiz-1-2/">2</button>
@@ -625,8 +639,7 @@
   </div>
   
   <script>
-    // (L'ensemble du code JavaScript existant reste inchangé)
-    
+    // (Code JavaScript existant inchangé sauf ajout des écouteurs pour le bouton INDEX sur la page de résultats)
     document.addEventListener("DOMContentLoaded", function() {
       var decorImage = document.querySelector('.pikachu');
       if (decorImage) {
@@ -786,7 +799,6 @@
              <img src="images/ken.gif" alt="Décoration droite" class="decor-right">
            </div>`;
         
-        // Passage automatique à la question suivante après 2 secondes
         setTimeout(() => {
           currentQuestion++;
           if (currentQuestion < quizData.length) {
@@ -798,7 +810,6 @@
         }, 2000);
         
       } else {
-        // Réponse incorrecte
         const selectedSound = (Math.random() < 0.5) ? incorrectSound : incorrectSound2;
         selectedSound.currentTime = 0;
         selectedSound.play();
@@ -808,20 +819,16 @@
              <img src="images/incorrect.png" alt="Mauvaise réponse" class="result-image incorrect">
              <img src="images/ken2.png" alt="Décoration droite" class="decor-rightX">
            </div>
-           <!-- Placeholder pour le bouton "Suivant" -->
            <div id="next-button-placeholder"></div>
            <div class="incorrect-answer-header">Réponse :</div>
            <div class="incorrect-answer-text">${data.correctAnswers.join(", ")}</div>`;
         
-        // Après 2 secondes, remplacer les images décoratives par le bouton "Suivant"
         setTimeout(() => {
-          // Retirer les images de décoration
           const incorrectContainer = document.querySelector(".incorrect-container");
           if (incorrectContainer) {
             incorrectContainer.innerHTML = "";
           }
           
-          // Insérer le bouton "Suivant" dans le placeholder et lui appliquer une marge inférieure de 10px
           const nextPlaceholder = document.getElementById("next-button-placeholder");
           if (nextPlaceholder) {
             nextPlaceholder.style.marginBottom = "10px";
@@ -844,7 +851,6 @@
             
             nextPlaceholder.appendChild(nextBtn);
             
-            // Au clic sur "Suivant", passer à la question suivante
             nextBtn.addEventListener("click", () => {
               nextBtn.remove();
               currentQuestion++;
@@ -860,7 +866,6 @@
       }
     });
     
-    // Affichage de la page finale
     function showResultPage() {
       quizContainer.style.display = "none";
       resultPage.style.display = "block";
@@ -876,7 +881,6 @@
         finalImage.classList.add("raised");
         finalImage.style.width = (window.innerWidth <= 480) ? "150px" : "190px";
         
-        // Ajout de l'overlay GIF de victoire
         if (!document.getElementById("confet-overlay")) {
           let overlay = document.createElement("img");
           overlay.id = "confet-overlay";
@@ -938,14 +942,21 @@
       }
     });
     
-    /* ======= AJOUT DU CODE POUR LE MODAL INDEX ======= */
+    /* Gestion du modal INDEX pour les deux boutons */
     document.addEventListener("DOMContentLoaded", function(){
       const indexModal = document.getElementById("index-modal");
       const closeIndexModal = document.getElementById("close-index-modal");
       const homeIndexBtn = document.getElementById("home-index-btn");
+      const resultIndexBtn = document.getElementById("result-index-btn");
       
       if(homeIndexBtn){
         homeIndexBtn.addEventListener("click", function(){
+          indexModal.style.display = "block";
+        });
+      }
+      
+      if(resultIndexBtn){
+        resultIndexBtn.addEventListener("click", function(){
           indexModal.style.display = "block";
         });
       }
@@ -963,7 +974,6 @@
         });
       });
     });
-    /* =================================================== */
   </script>
 </body>
 </html>
